@@ -6,7 +6,7 @@ import Item from "../../../GameSystems/ItemSystem/Item";
 import Finder from "../../../GameSystems/Searching/Finder";
 import { TargetableEntity } from "../../../GameSystems/Targeting/TargetableEntity";
 
-export default class PickupTargetedItem extends NPCAction {
+export default class PickupItem extends NPCAction {
 
     // The targeting strategy used for this GotoAction - determines how the target is selected basically
     protected override _targetFinder: Finder<Item>;

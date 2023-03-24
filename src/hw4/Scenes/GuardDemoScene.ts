@@ -71,7 +71,7 @@ export default class GuardDemoScene extends HW4Scene {
         this.load.spritesheet("RedHealer", "hw4_assets/spritesheets/RedHealer.json");
 
         // Load the tilemap
-        this.load.tilemap("level", "hw4_assets/tilemaps/HW4Tilemap.json");
+        this.load.tilemap("level", "hw4_assets/tilemaps/Tilemap.json");
 
         // Load the enemy locations
         this.load.object("red", "hw4_assets/data/enemies/red.json");
@@ -181,7 +181,7 @@ export default class GuardDemoScene extends HW4Scene {
      */
     protected initializePlayer(): void {
         let player = this.add.animatedSprite(PlayerActor, "player1", "primary");
-        player.position.set(40, 40);
+        player.position.set(211, 58);
         player.battleGroup = 2;
         player.health = 10;
         player.maxHealth = 10;
