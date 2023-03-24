@@ -20,6 +20,7 @@ export default abstract class NPCBehavior extends StateMachineGoapAI<NPCAction> 
     public initializeAI(owner: NPCActor, options: Record<string, any>): void {
         this.owner = owner;
         this.receiver.subscribe(ItemEvent.LASERGUN_FIRED);
+        this.receiver.subscribe(ItemEvent.CONSUMABLE_USED);
     }
 
     public activate(options: Record<string, any>): void {}
@@ -38,6 +39,10 @@ export default abstract class NPCBehavior extends StateMachineGoapAI<NPCAction> 
                 this.handleLasergunFired(event.data.get("actorId"), event.data.get("to"), event.data.get("from"));
                 break;
             }
+            case ItemEvent.CONSUMABLE_USED: {
+                this.handleConsumableUsed(event.data.get("actorId"), event.data.get("targetId"));
+                break;
+            }
             default: {
                 super.handleEvent(event);
                 break;
@@ -48,6 +53,17 @@ export default abstract class NPCBehavior extends StateMachineGoapAI<NPCAction> 
     protected handleLasergunFired(actorId: number, to: Vec2, from: Vec2): void {
         if (actorId !== this.owner.id) {
             this.owner.health -= this.owner.collisionShape.getBoundingRect().intersectSegment(to, from) ? 1 : 0;
+        }
+    }
+
+    protected handleConsumableUsed(actorId: number, targetId: number): void {
+        if(actorId !== targetId && targetId === this.owner.id) {
+            if(this.owner.health < 5) {
+                this.owner.health += 5;
+            }
+            else {
+                this.owner.health = this.owner.maxHealth;
+            }
         }
     }
     
