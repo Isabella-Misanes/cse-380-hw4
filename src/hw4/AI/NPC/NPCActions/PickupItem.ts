@@ -21,7 +21,9 @@ export default class PickupItem extends NPCAction {
 
     public performAction(target: Item): void {
         if (target.inventory === null) {
-            this.actor.inventory.add(target)
+            if(Math.abs(this.actor.position.x - target.position.x) < 1 && Math.abs(this.actor.position.y - target.position.y) < 1) {
+                this.actor.inventory.add(target);
+            }
         }
         this.finished();
     }
