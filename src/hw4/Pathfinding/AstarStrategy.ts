@@ -20,7 +20,16 @@ export default class AstarStrategy extends NavPathStrat {
      * @see NavPathStrat.buildPath()
      */
     public buildPath(to: Vec2, from: Vec2): NavigationPath {
-        return new NavigationPath(new Stack());
+        let start = this.mesh.graph.snap(from);
+		let end = this.mesh.graph.snap(to);
+
+		let pathStack = new Stack<Vec2>(this.mesh.graph.numVertices);
+
+		pathStack.push(to.clone());
+		console.log(this.mesh.graph.getNodePosition(start));
+
+		
+        return new NavigationPath(pathStack);
     }
     
 }
